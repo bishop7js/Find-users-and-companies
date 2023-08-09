@@ -117,102 +117,58 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"src/User.ts":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.User = void 0;
-var User = /** @class */function () {
-  function User() {
-    this.name = "Sulakshitha Rathnayake";
-    this.location = {
-      lat: 7.8731,
-      lon: 80.7718
-    };
-    console.log(this.name);
+})({"../../../AppData/Roaming/nvm/v18.15.0/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
   }
-  return User;
-}();
-exports.User = User;
-},{}],"src/Company.ts":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Company = void 0;
-var Company = /** @class */function () {
-  function Company() {
-    this.name = "Google";
-    this.location = {
-      lat: 37.419857,
-      lon: -122.078827
-    };
-  }
-  return Company;
-}();
-exports.Company = Company;
-},{}],"src/CustomMap.ts":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.CustomMap = void 0;
-var CustomMap = /** @class */function () {
-  function CustomMap(divId) {
-    this.googleMap = google.maps.Map;
-    var mapElement = document.getElementById(divId);
-    if (mapElement) {
-      this.googleMap = new google.maps.Map(mapElement, {
-        zoom: 1,
-        center: {
-          lat: 0,
-          lng: 0
-        }
-      });
-    } else {
-      console.error("Could not find 'map' element");
+  return bundleURL;
+}
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+    if (matches) {
+      return getBaseURL(matches[0]);
     }
   }
-  CustomMap.prototype.addUserMarker = function (user) {
-    new google.maps.Marker({
-      map: this.googleMap,
-      position: {
-        lat: user.location.lat,
-        lng: user.location.lon
-      }
-    });
+  return '/';
+}
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../../../AppData/Roaming/nvm/v18.15.0/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+function updateLink(link) {
+  var newLink = link.cloneNode();
+  newLink.onload = function () {
+    link.remove();
   };
-  CustomMap.prototype.addCompnayMarker = function (company) {
-    new google.maps.Marker({
-      map: this.googleMap,
-      position: {
-        lat: company.location.lat,
-        lng: company.location.lon
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+var cssTimeout = null;
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
       }
-    });
-  };
-  return CustomMap;
-}();
-exports.CustomMap = CustomMap;
-},{}],"src/index.ts":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var User_1 = require("./User");
-var Company_1 = require("./Company");
-var CustomMap_1 = require("./CustomMap");
-var user = new User_1.User();
-var company = new Company_1.Company();
-var map = new CustomMap_1.CustomMap('map');
-map.addUserMarker(user);
-map.addCompnayMarker(company);
-},{"./User":"src/User.ts","./Company":"src/Company.ts","./CustomMap":"src/CustomMap.ts"}],"../../../AppData/Roaming/nvm/v18.15.0/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+    }
+    cssTimeout = null;
+  }, 50);
+}
+module.exports = reloadCSS;
+},{"./bundle-url":"../../../AppData/Roaming/nvm/v18.15.0/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../../../AppData/Roaming/nvm/v18.15.0/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -381,5 +337,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../AppData/Roaming/nvm/v18.15.0/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/index.ts"], null)
-//# sourceMappingURL=/src.f10117fe.js.map
+},{}]},{},["../../../AppData/Roaming/nvm/v18.15.0/node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/index.js.map
