@@ -3,16 +3,20 @@ export class User {
   name: string;
   location: {
     lat: number;
-    lon: number;
+    lng: number;
   };
 
   constructor() {
     this.name = "Sulakshitha Rathnayake";
     this.location = {
         lat: 7.8731,
-        lon: 80.7718
+        lng: 80.7718
     }
+  }
 
-    console.log(this.name);
+  renderInfoContent() {
+    return (
+      `User name : ${this.name}`
+    );
   }
 }

@@ -129,10 +129,12 @@ var User = /** @class */function () {
     this.name = "Sulakshitha Rathnayake";
     this.location = {
       lat: 7.8731,
-      lon: 80.7718
+      lng: 80.7718
     };
-    console.log(this.name);
   }
+  User.prototype.renderInfoContent = function () {
+    return "User name : ".concat(this.name);
+  };
   return User;
 }();
 exports.User = User;
@@ -148,9 +150,12 @@ var Company = /** @class */function () {
     this.name = "Google";
     this.location = {
       lat: 37.419857,
-      lon: -122.078827
-    };
+      lng: -122.078827
+    }, this.phrase = "We are trying to easy peoples life";
   }
+  Company.prototype.renderInfoContent = function () {
+    return "Company name : ".concat(this.name, "\n          <br />\n          <br />\n          Compnay description : ").concat(this.phrase);
+  };
   return Company;
 }();
 exports.Company = Company;
@@ -177,22 +182,20 @@ var CustomMap = /** @class */function () {
       console.error("Could not find 'map' element");
     }
   }
-  CustomMap.prototype.addUserMarker = function (user) {
-    new google.maps.Marker({
+  CustomMap.prototype.addMarker = function (mappable) {
+    var _this = this;
+    var marker = new google.maps.Marker({
       map: this.googleMap,
       position: {
-        lat: user.location.lat,
-        lng: user.location.lon
+        lat: mappable.location.lat,
+        lng: mappable.location.lng
       }
     });
-  };
-  CustomMap.prototype.addCompnayMarker = function (company) {
-    new google.maps.Marker({
-      map: this.googleMap,
-      position: {
-        lat: company.location.lat,
-        lng: company.location.lon
-      }
+    marker.addListener("click", function () {
+      var infoWindow = new google.maps.InfoWindow({
+        content: mappable.renderInfoContent()
+      });
+      infoWindow.open(_this.googleMap, marker);
     });
   };
   return CustomMap;
@@ -210,8 +213,9 @@ var CustomMap_1 = require("./CustomMap");
 var user = new User_1.User();
 var company = new Company_1.Company();
 var map = new CustomMap_1.CustomMap('map');
-map.addUserMarker(user);
-map.addCompnayMarker(company);
+console.log('EEEEEEEEEEEEEEEEE', company);
+map.addMarker(user);
+map.addMarker(company);
 },{"./User":"src/User.ts","./Company":"src/Company.ts","./CustomMap":"src/CustomMap.ts"}],"../../../AppData/Roaming/nvm/v18.15.0/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -237,7 +241,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64056" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50737" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
